@@ -37,6 +37,7 @@ const LoginAside = styled.section`
   width: 50vw;
   background: url('images/login-bkgd.png');
   background-size: cover;
+  text-align: center;
 `
 const InputContainer = styled.div`
   margin-top: 8.205%;
