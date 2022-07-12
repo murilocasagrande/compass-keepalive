@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 
 export const UserFormInput = styled.input`
@@ -6,9 +5,9 @@ export const UserFormInput = styled.input`
   background: none;
   border-radius: 50px;
   padding: 20px;
-  border: 1px solid #FFF;
+  border: 1px solid #E0E0E0;
   width: 90.88%;
-  color: #FFF;
+  color: #E0E0E0;
   &[type='email'] {
 
   }
@@ -19,6 +18,7 @@ export const UserFormInput = styled.input`
     background: linear-gradient(90deg, #FF2D04 0%, #C13216 100%);
     box-shadow: 5px 5px 15px 0 rgba(0,0,0,.5);
     margin-top: 29.487%;
+    font-weight: 700;
   }
 `;
 
