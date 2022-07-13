@@ -94,9 +94,9 @@ color: #FFF;
 
 const HomeFooter = () => {
   const history = useNavigate();
-  const [seconds = 60, setSeconds] = useState<number>();
+  const [seconds = 30, setSeconds] = useState<number>();
   useEffect(() => {
-    // countdown(seconds);
+    countdown(seconds);
   }, [countdown, seconds])
   function countdown(counter: Number | any) {
     setTimeout(() => {
