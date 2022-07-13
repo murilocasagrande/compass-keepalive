@@ -20,6 +20,7 @@ export const UserFormInput = styled.input`
     box-shadow: 5px 5px 15px 0 rgba(0,0,0,.5);
     // margin-top: 29.487%;
     font-weight: 700;
+    border: none;
   }
 `;
 
