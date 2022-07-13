@@ -42,6 +42,7 @@ const IconContainer = styled.div`
 const InputIcon = styled.img`
   height: 20px;
   width: 20px;
+  transition: all 0.5s ease-out;
 `
 const ErrorDiv = styled.div`
   height: 25.487%;

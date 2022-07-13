@@ -22,16 +22,24 @@ const HeaderClock = styled.div`
   }
 `
 const HeaderWeather = styled.div`
-// display: flex;
+  display: flex;
+  flex-direction: column;
   text-align: right;
   font-weight: bold;
-  img {
-    max-width: 32px;
-    max-height: 32px;
-  }
-  h1 {
-    font-size: 2.5rem;
-  }
+  max-width: 15vh;
+  div{
+    display:flex;
+    flex-direction: row;
+    img {
+      flex: 1;
+      max-width: 48px;
+      max-height: 48px;
+    }
+    h1 {
+      flex: 1;
+      font-size: 2.5rem;
+    }
+}
 `
 
 const HomeHeader = () => {
@@ -48,7 +56,7 @@ const HomeHeader = () => {
       <HeaderWeather>
         <p>Passo Fundo - RS</p>
         <div>
-          {/* <img src='images/weather.png' alt='weather img'></img> */}
+          <img src='images/weather.png' alt='weather img'></img>
           <h1>22º</h1>
         </div>
       </HeaderWeather>
