@@ -43,27 +43,79 @@ const InputIcon = styled.img`
   height: 20px;
   width: 20px;
 `
+const ErrorDiv = styled.div`
+  height: 25.487%;
+  max-height: 25.487%;
+  p {
+    color: #E9B425;
+    margin: 10% 18%;
+    text-align: center;
+    display: none;
+  }
+`
 
 const LoginForm = () => {
   const history = useNavigate();
+
+  let hadError: Boolean;
+  let userInput: HTMLInputElement | null;
+  let pwInput: HTMLInputElement | null;
+  let errorMsg: HTMLParagraphElement | null;
+
+  function adjustIcons() {
+    let userIcon: HTMLImageElement | null = document.querySelector('.userIcon');
+    let pwIcon: HTMLImageElement | null = document.querySelector('.pwIcon');
+    if (userIcon && pwIcon) {
+      userIcon.style.marginRight = '3vw';
+      pwIcon.style.marginRight = '3vw';
+    }
+  }
+  function errorMessage(userInput: HTMLInputElement | null, pwInput: HTMLInputElement | null, errorMsg: HTMLParagraphElement | null) {
+    if (userInput) {
+      userInput.classList.add('error');
+      userInput.style.borderColor = '#E9B425';
+    }
+    if (pwInput) {
+      pwInput.classList.add('error')
+      pwInput.style.borderColor = '#E9B425';
+    }
+    if (errorMsg) {
+      errorMsg.style.display = 'flex';
+    }
+    hadError = true;
+  }
   return (
     <FormContainer>
       <Form>
         <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o login na rede</p></Welcome>
         <h2>Login</h2>
         <InputContainer>
-          <UserFormInput type='email' name='userName' placeholder='Usuário' />
+          <UserFormInput type='email' className='userName' placeholder='Usuário' onChange={adjustIcons} />
           <IconContainer>
-            <InputIcon src='images/icon-user.svg' />
+            <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
-          <UserFormInput type='password' name='userPw' placeholder='Senha' />
+          <UserFormInput type='password' className='userPw' placeholder='Senha' onChange={adjustIcons} />
           <IconContainer>
-            <InputIcon src='images/icon-password.svg' />
+            <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
         </InputContainer>
-        <UserFormInput type='submit' name='userSubmit' value='Continuar' onClick={() => history('/home')} />
+        <ErrorDiv>
+          <p className='errorMsg'>Ops, usuário ou senha inválidos. Tente novamente!</p>
+        </ErrorDiv>
+        <UserFormInput type='submit' name='userSubmit' value='Continuar' onClick={(event) => {
+          event.preventDefault();
+          if (!hadError) {
+            userInput = document.querySelector('.userName');
+            pwInput = document.querySelector('.userPw');
+            errorMsg = document.querySelector('.errorMsg');
+            errorMessage(userInput, pwInput, errorMsg);
+          } else {
+            history('/home');
+          }
+
+        }} />
       </Form>
     </FormContainer>
   )

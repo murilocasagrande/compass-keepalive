@@ -22,6 +22,16 @@ const HeaderClock = styled.div`
   }
 `
 const HeaderWeather = styled.div`
+// display: flex;
+  text-align: right;
+  font-weight: bold;
+  img {
+    max-width: 32px;
+    max-height: 32px;
+  }
+  h1 {
+    font-size: 2.5rem;
+  }
 `
 
 const HomeHeader = () => {
@@ -37,7 +47,10 @@ const HomeHeader = () => {
       </HeaderClock>
       <HeaderWeather>
         <p>Passo Fundo - RS</p>
-        <h1>22º</h1>
+        <div>
+          {/* <img src='images/weather.png' alt='weather img'></img> */}
+          <h1>22º</h1>
+        </div>
       </HeaderWeather>
     </Header>
   )

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -21,9 +21,16 @@ const SeparatingDiv = styled.div`
   border-right: 1px solid #FFF;
   height: 58px;
   padding: 1% 2%;
+  width: 45vw;
   & > p {
-    max-width: 85.18%;
-    margin-left: 45.44%;
+    // max-width: 85.18%;
+    margin-left: 35.44%;
+  }
+  @media screen and (max-width: 1440px){
+    max-width: 50vw;
+    & > p {
+      margin-left: 30%;
+    }
   }
 `
 const RefreshTimeout = styled.div`
@@ -39,6 +46,20 @@ const RefreshTimeout = styled.div`
       font-weight: bold;
     }
   }
+  @media screen and (max-height: 1010px){
+    .timeout {
+      p:first-child {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  @media screen and (max-height: 900px){
+    .timeout {
+      p:first-child {
+        font-size: 2rem;
+      }
+    }
+  }
 `
 const FooterButtons = styled.div`
   display:flex;
@@ -51,6 +72,7 @@ const NavigateBtn = styled.button`
   background-color: #FFF;
   color: #C13216;
   height: 9.9vh;
+  flex-grow: 1;
   width: 6.82vw;
   box-shadow: none;
   border: none;
@@ -72,7 +94,7 @@ color: #FFF;
 
 const HomeFooter = () => {
   const history = useNavigate();
-  const [seconds = 600, setSeconds] = useState<number>();
+  const [seconds = 60, setSeconds] = useState<number>();
   useEffect(() => {
     // countdown(seconds);
   }, [countdown, seconds])

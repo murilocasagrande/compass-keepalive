@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const BodyContainer = styled.body`
+const BodyContainer = styled.div`
   display:flex;
 `
 
