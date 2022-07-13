@@ -23,7 +23,7 @@ const LoginForm = styled.form`
     font-size: 1.875rem;
   }
 `
-const Welcome = styled.p`
+const Welcome = styled.div`
 width: 72.18%;
 text-align: left;
 margin-bottom: 34.615%;
@@ -60,7 +60,7 @@ const Login = () => {
     <LoginPage>
       <FormContainer>
         <LoginForm>
-          <Welcome><h1>Olá,</h1>Para continuar navegando de forma segura, efetue o login na rede</Welcome>
+          <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o login na rede</p></Welcome>
           <h2>Login</h2>
           <InputContainer>
             <UserFormInput type='email' name='userName' placeholder='Usuário' />
