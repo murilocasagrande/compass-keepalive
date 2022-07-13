@@ -10,8 +10,9 @@ const BodyLogo = styled.section`
     z-index: 0;
     position: absolute;
     left: -15%; 
-    // top: 21.5%;
     bottom: 1%;
+    max-width: 70vw;
+    max-height: 70vh;
   }
 `
 const Mission = styled.section`
@@ -25,6 +26,12 @@ const Mission = styled.section`
     
     &:first-child{
       font-size: 2.25rem;
+  }
+}
+  @media screen and (max-width: 1441px){
+    h1{
+      font-size: 3rem;
+    }
   }
 `
 

@@ -85,9 +85,8 @@ const HomeFooter = () => {
       history('/');
     }, 1000)
   }
-  const ButtonHandler = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const ButtonHandler = () => {
     window.open('https://www.google.com', '_blank');
-
   }
 
   return (
