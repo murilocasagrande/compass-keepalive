@@ -4,7 +4,7 @@ import HomeBody from './Body';
 import HomeFooter from './Footer';
 
 const HomeContainer = styled.div`
-background: linear-gradient(105.96deg, #FFFFFF 0%, #F0F0F0 97.86%);
+//background: linear-gradient(105.96deg, #FFFFFF 0%, #F0F0F0 97.86%);
 `
 
 const Home = () => {
