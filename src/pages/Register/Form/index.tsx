@@ -47,17 +47,23 @@ const InputIcon = styled.img`
   width: 20px;
   transition: all 0.5s ease-out;
 `
-const ErrorDiv = styled.div`
-  height: 25.487%;
-  max-height: 25.487%;
-  p {
-    color: #E9B425;
-    margin: 10% 18%;
-    text-align: center;
-    display: none;
+
+const PasswordHintsList = styled.ul`
+  box-sizing: border-box;
+  padding: 5%;
+`
+
+const PasswordHint = styled.li`
+  list-style-type: '✕ ';
+  color: red;
+  &.valid {
+    color: green;
+    list-style-type: '✓ ';
   }
 `
-const RegisterP = styled.p`
+
+
+const LoginP = styled.p`
   margin-top: 10px;
   text-align: center;
   max-width: 90.88%;
@@ -66,7 +72,7 @@ const RegisterP = styled.p`
   }
 `
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const history = useNavigate();
 
   let hadError: Boolean;
@@ -99,8 +105,8 @@ const LoginForm = () => {
   return (
     <FormContainer>
       <Form>
-        <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o login na rede</p></Welcome>
-        <h2>Login</h2>
+        <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o seu cadastro</p></Welcome>
+        <h2>Cadastro</h2>
         <InputContainer>
           <UserFormInput type='email' className='userName' placeholder='Usuário' onChange={adjustIcons} />
           <IconContainer>
@@ -113,10 +119,13 @@ const LoginForm = () => {
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
         </InputContainer>
-        <ErrorDiv>
-          <p className='errorMsg'>Ops, usuário ou senha inválidos. Tente novamente!</p>
-        </ErrorDiv>
-        <UserFormInput type='submit' name='userSubmit' value='Continuar' onClick={(event) => {
+        <PasswordHintsList>
+          <PasswordHint>Letra Maiúscula</PasswordHint>
+          <PasswordHint>Letra Minúscula</PasswordHint>
+          <PasswordHint>Número</PasswordHint>
+          <PasswordHint>6 Dígitos</PasswordHint>
+        </PasswordHintsList>
+        <UserFormInput type='submit' name='userSubmit' value='Cadastrar' onClick={(event) => {
           event.preventDefault();
           if (!hadError) {
             userInput = document.querySelector('.userName');
@@ -128,9 +137,9 @@ const LoginForm = () => {
           }
 
         }} />
-        <RegisterP>Não tem conta? Cadastre-se <a href='/register'>aqui</a>.</RegisterP>
+        <LoginP>Já possui uma conta? Entre <a href='/'>aqui</a>.</LoginP>
       </Form>
     </FormContainer>
   )
 }
-export default LoginForm;
+export default RegisterForm;
