@@ -98,17 +98,17 @@ const LoginForm = () => {
   }
   return (
     <FormContainer>
-      <Form>
+      <Form id='registerUserForm'>
         <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o login na rede</p></Welcome>
         <h2>Login</h2>
         <InputContainer>
-          <UserFormInput type='email' className='userName' placeholder='Usuário' onChange={adjustIcons} />
+          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={adjustIcons} />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
-          <UserFormInput type='password' className='userPw' placeholder='Senha' onChange={adjustIcons} />
+          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha' onChange={adjustIcons} />
           <IconContainer>
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
