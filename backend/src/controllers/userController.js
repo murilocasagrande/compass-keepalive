@@ -1,11 +1,11 @@
 import mongoose from "mongoose";
 import users from "../models/User.js";
 import CryptoES from "crypto-es";
-
 class UserController {
 
     static createUser = (req, res) => {
         let user = new users(req.body);
+
         let validation = user.isValid();
         if (validation.ok) {
             // user.password = CryptoES.SHA256(user.user).toString();
@@ -31,6 +31,7 @@ class UserController {
 
     static listUser = (req, res) => {
         let { user } = req.query;
+
         console.log(req.body);
         users.find({ 'user': user }, {}, (err, users) => {
             res.status(200).send(users);
