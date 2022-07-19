@@ -1,6 +1,8 @@
 import styled from 'styled-components';
 import UserFormInput from '../Inputs/';
 import { useNavigate } from 'react-router-dom';
+// import { createUser } from 'common/ts/Register';
+import { useState } from 'react';
 
 const FormContainer = styled.div`
 padding: 10.26% 13.44% 10.26% 14.84%;
@@ -73,11 +75,48 @@ const LoginP = styled.p`
 `
 
 const RegisterForm = () => {
+
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
+  const [userIsValid, setUserIsValid] = useState(false);
+  const [pwIsValid, setPwIsValid] = useState(false);
+
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(userIsValid, pwIsValid);
+    if (userIsValid && pwIsValid) {
+      console.log(user, password);
+
+      try {
+        let res = await fetch("http://127.0.0.1:3000/users", {
+          method: "POST",
+          body: JSON.stringify({
+            user: user,
+            password: password
+          }),
+        });
+        console.log(res.body);
+        let resJson = await res.json();
+        console.log(resJson);
+
+        if (res.status === 201) {
+          alert(`Usuário: ${userInput?.value}, senha: ${pwInput?.value} foi cadastrado com sucesso`);
+          // history('/');
+        } else {
+          alert("Some error occured");
+        }
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      alert('Usuário ou senha inválidos');
+    }
+
+  }
+
   const history = useNavigate();
   const userRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
-
-  let userIsValid = false;
-  let pwIsValid = false;
 
   let userInput: HTMLInputElement | null;
   let pwInput: HTMLInputElement | null;
@@ -112,7 +151,8 @@ const RegisterForm = () => {
     getHints();
 
     if (userInput?.value) {
-      userIsValid = userRegExp.test(userInput.value) ? true : false;
+      setUserIsValid(userRegExp.test(userInput.value) ? true : false);
+
     }
 
 
@@ -135,23 +175,29 @@ const RegisterForm = () => {
         i++;
       }
       if (i === 4) {
-        pwIsValid = true;
+        setPwIsValid(true)
       }
     }
   }
   return (
     <FormContainer>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o seu cadastro</p></Welcome>
         <h2>Cadastro</h2>
         <InputContainer>
-          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={validateFields} required />
+          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={(e) => {
+            setUser(e.target.value)
+            validateFields();
+          }} required />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
-          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha' onChange={validateFields} required />
+          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha' onChange={(e) => {
+            setPassword(e.target.value)
+            validateFields();
+          }} required />
           <IconContainer>
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
@@ -163,16 +209,7 @@ const RegisterForm = () => {
           <PasswordHint id='numberHint'>Número</PasswordHint>
           <PasswordHint id='lengthHint'>6 Dígitos</PasswordHint>
         </PasswordHintsList>
-        <UserFormInput type='submit' name='userSubmit' value='Cadastrar' onClick={(event) => {
-          event.preventDefault();
-          if (userIsValid && pwIsValid) {
-            alert(`Usuário: ${userInput?.value}, senha: ${pwInput?.value} foi cadastrado com sucesso`);
-            history('/');
-          } else {
-            alert('Usuário ou senha inválidos');
-          }
-
-        }} />
+        <UserFormInput type='submit' name='userSubmit' value='Cadastrar' />
         <LoginP>Já possui uma conta? Entre <a href='/'>aqui</a>.</LoginP>
       </Form>
     </FormContainer>
