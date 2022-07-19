@@ -74,11 +74,17 @@ const LoginP = styled.p`
 
 const RegisterForm = () => {
   const history = useNavigate();
+  const userRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
-  let hadError: Boolean;
+  let userIsValid = false;
+  let pwIsValid = false;
+
   let userInput: HTMLInputElement | null;
   let pwInput: HTMLInputElement | null;
-  let errorMsg: HTMLParagraphElement | null;
+  let upperHint: HTMLLIElement | null;
+  let lowerHint: HTMLLIElement | null;
+  let numberHint: HTMLLIElement | null;
+  let lengthHint: HTMLLIElement | null;
 
   function adjustIcons() {
     let userIcon: HTMLImageElement | null = document.querySelector('.userIcon');
@@ -88,19 +94,50 @@ const RegisterForm = () => {
       pwIcon.style.marginRight = '3vw';
     }
   }
-  function errorMessage(userInput: HTMLInputElement | null, pwInput: HTMLInputElement | null, errorMsg: HTMLParagraphElement | null) {
-    if (userInput) {
-      userInput.classList.add('error');
-      userInput.style.borderColor = '#E9B425';
+
+  function getHints() {
+    if (!upperHint || !lowerHint || !numberHint || !lengthHint) {
+      upperHint = document.querySelector('#upperHint');
+      lowerHint = document.querySelector('#lowerHint');
+      numberHint = document.querySelector('#numberHint');
+      lengthHint = document.querySelector('#lengthHint');
     }
-    if (pwInput) {
-      pwInput.classList.add('error')
-      pwInput.style.borderColor = '#E9B425';
+  }
+
+  function validateFields() {
+    adjustIcons();
+
+    userInput = document.querySelector('.userName');
+    pwInput = document.querySelector('.userPw');
+    getHints();
+
+    if (userInput?.value) {
+      userIsValid = userRegExp.test(userInput.value) ? true : false;
     }
-    if (errorMsg) {
-      errorMsg.style.display = 'flex';
+
+
+    if (pwInput?.value) {
+      let i = 0;
+      if (/([A-Z])/.test(pwInput.value)) {
+        upperHint?.classList.add('valid');
+        i++;
+      }
+      if (/([a-z])/.test(pwInput.value)) {
+        lowerHint?.classList.add('valid');
+        i++;
+      }
+      if (/([0-9])/.test(pwInput.value)) {
+        numberHint?.classList.add('valid');
+        i++;
+      }
+      if (pwInput.value.length >= 6) {
+        lengthHint?.classList.add('valid');
+        i++;
+      }
+      if (i === 4) {
+        pwIsValid = true;
+      }
     }
-    hadError = true;
   }
   return (
     <FormContainer>
@@ -108,32 +145,31 @@ const RegisterForm = () => {
         <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o seu cadastro</p></Welcome>
         <h2>Cadastro</h2>
         <InputContainer>
-          <UserFormInput type='email' className='userName' placeholder='Usuário' onChange={adjustIcons} />
+          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={validateFields} required />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
-          <UserFormInput type='password' className='userPw' placeholder='Senha' onChange={adjustIcons} />
+          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha' onChange={validateFields} required />
           <IconContainer>
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
         </InputContainer>
         <PasswordHintsList>
-          <PasswordHint>Letra Maiúscula</PasswordHint>
-          <PasswordHint>Letra Minúscula</PasswordHint>
-          <PasswordHint>Número</PasswordHint>
-          <PasswordHint>6 Dígitos</PasswordHint>
+          <h3>A senha deve possuir, no mínimo:</h3>
+          <PasswordHint id='upperHint'>Letra Maiúscula</PasswordHint>
+          <PasswordHint id='lowerHint'>Letra Minúscula</PasswordHint>
+          <PasswordHint id='numberHint'>Número</PasswordHint>
+          <PasswordHint id='lengthHint'>6 Dígitos</PasswordHint>
         </PasswordHintsList>
         <UserFormInput type='submit' name='userSubmit' value='Cadastrar' onClick={(event) => {
           event.preventDefault();
-          if (!hadError) {
-            userInput = document.querySelector('.userName');
-            pwInput = document.querySelector('.userPw');
-            errorMsg = document.querySelector('.errorMsg');
-            errorMessage(userInput, pwInput, errorMsg);
+          if (userIsValid && pwIsValid) {
+            alert(`Usuário: ${userInput?.value}, senha: ${pwInput?.value} foi cadastrado com sucesso`);
+            history('/');
           } else {
-            history('/home');
+            alert('Usuário ou senha inválidos');
           }
 
         }} />

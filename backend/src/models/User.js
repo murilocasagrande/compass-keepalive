@@ -23,7 +23,7 @@ function validateUser(user) {
 }
 
 function validatePassword(password) {
-    return password.length >= 6 ? true : 'password'
+    return /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{5,})\S$/.test(password) ? true : 'password'
 }
 
 const users = mongoose.model("users", userSchema)

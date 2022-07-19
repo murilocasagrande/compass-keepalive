@@ -3,7 +3,7 @@ import users from "./usersRoutes.js";
 
 const routes = (app) => {
     app.route('/').get((req, res) => {
-        res.json({ title: "NodeJS backend API" })
+        res.json({ title: "Compass Keepalive User API" })
     })
 
     app.use(

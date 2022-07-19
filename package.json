@@ -11,6 +11,7 @@
     "@types/node": "^16.11.43",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
+    "crypto-es": "^1.2.7",
     "express": "^4.17.3",
     "mongoose": "^6.2.6",
     "react": "^18.2.0",
