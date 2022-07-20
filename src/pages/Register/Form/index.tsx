@@ -92,9 +92,6 @@ const RegisterForm = () => {
           body: userData,
           headers: new Headers({ 'Content-Type': 'Application/Json' })
         });
-        console.log(res.body);
-        let resJson = await res.json();
-        console.log(resJson);
 
         if (res.status === 201) {
           alert(`Usuário: ${user}, senha: ${password} foi cadastrado com sucesso`);
@@ -200,10 +197,10 @@ const RegisterForm = () => {
         </InputContainer>
         <PasswordHintsList>
           <h3>A senha deve possuir, no mínimo:</h3>
-          <PasswordHint id='upperHint'>Letra Maiúscula</PasswordHint>
-          <PasswordHint id='lowerHint'>Letra Minúscula</PasswordHint>
-          <PasswordHint id='numberHint'>Número</PasswordHint>
-          <PasswordHint id='lengthHint'>6 Dígitos</PasswordHint>
+          <PasswordHint id='upperHint'>1 Letra Maiúscula</PasswordHint>
+          <PasswordHint id='lowerHint'>1 Letra Minúscula</PasswordHint>
+          <PasswordHint id='numberHint'>1 Número</PasswordHint>
+          <PasswordHint id='lengthHint'>6 Caracteres</PasswordHint>
         </PasswordHintsList>
         <UserFormInput type='submit' name='userSubmit' value='Cadastrar' />
         <LoginP>Já possui uma conta? Entre <a href='/'>aqui</a>.</LoginP>
