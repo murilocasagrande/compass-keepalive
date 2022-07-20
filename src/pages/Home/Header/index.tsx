@@ -44,6 +44,40 @@ const HeaderWeather = styled.div`
 
 const HomeHeader = () => {
   let currentDate = new Date();
+
+  function getWeather() {
+    let url;
+    navigator.geolocation.getCurrentPosition((pos) => {
+      let lat = pos.coords.latitude;
+      let long = pos.coords.longitude;
+      url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=imperial&APPID=c922148e12e65d683d68dbbd1378af25`;
+      fetchApi(url);
+    });
+  }
+  function fetchApi(url: string) {
+    let city = document.querySelector('#city');
+    let temp = document.querySelector('#temperature');
+    fetch(url)
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        let tempInCelsius = ((5 / 9) * (data.main.temp - 32)).toFixed(0);
+        if (city && temp) {
+          city.innerHTML = data.name;
+          temp.innerHTML = tempInCelsius + 'º';
+        }
+      })
+      .catch((err) => {
+        if (city && temp) {
+          city.innerHTML = 'Error';
+          temp.innerHTML = '-';
+        }
+      })
+  }
+
+  getWeather();
+
   return (
     <Header>
       <HeaderLogo src='images/compasso-logo-dark.png' />
@@ -54,10 +88,10 @@ const HomeHeader = () => {
         <p>{`${WeekDay[currentDate.getDay()]}, ${currentDate.getDate()} de ${Month[currentDate.getMonth()]} de ${currentDate.getFullYear()}`}</p>
       </HeaderClock>
       <HeaderWeather>
-        <p>Passo Fundo - RS</p>
+        <p id='city'></p>
         <div>
           <img src='images/weather.png' alt='weather img'></img>
-          <h1>22º</h1>
+          <h1 id='temperature'></h1>
         </div>
       </HeaderWeather>
     </Header>
