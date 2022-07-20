@@ -84,27 +84,23 @@ const RegisterForm = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(userIsValid, pwIsValid);
     if (userIsValid && pwIsValid) {
-      console.log(user, password);
-
+      const userData = JSON.stringify({ user: user, password: password })
       try {
         let res = await fetch("http://127.0.0.1:3000/users", {
           method: "POST",
-          body: JSON.stringify({
-            user: user,
-            password: password
-          }),
+          body: userData,
+          headers: new Headers({ 'Content-Type': 'Application/Json' })
         });
         console.log(res.body);
         let resJson = await res.json();
         console.log(resJson);
 
         if (res.status === 201) {
-          alert(`Usuário: ${userInput?.value}, senha: ${pwInput?.value} foi cadastrado com sucesso`);
-          // history('/');
+          alert(`Usuário: ${user}, senha: ${password} foi cadastrado com sucesso`);
+          history('/');
         } else {
-          alert("Some error occured");
+          alert("Ocorreu algum erro ao cadastrar.");
         }
       } catch (error) {
         alert(error);
@@ -118,12 +114,12 @@ const RegisterForm = () => {
   const history = useNavigate();
   const userRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
-  let userInput: HTMLInputElement | null;
-  let pwInput: HTMLInputElement | null;
-  let upperHint: HTMLLIElement | null;
-  let lowerHint: HTMLLIElement | null;
-  let numberHint: HTMLLIElement | null;
-  let lengthHint: HTMLLIElement | null;
+  let userInput: HTMLInputElement | null
+    , pwInput: HTMLInputElement | null
+    , upperHint: HTMLLIElement | null
+    , lowerHint: HTMLLIElement | null
+    , numberHint: HTMLLIElement | null
+    , lengthHint: HTMLLIElement | null;
 
   function adjustIcons() {
     let userIcon: HTMLImageElement | null = document.querySelector('.userIcon');
