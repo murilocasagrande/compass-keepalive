@@ -38,6 +38,20 @@ class UserController {
         })
 
     }
+    static validateLogin = (req, res) => {
+        let { user, password } = req.query;
+
+        console.log(user, password);
+        console.log(req.body);
+        users.find({ 'user': user, 'password': password }, {}, (err, users) => {
+            if (users.length > 0) {
+                res.status(200).send(users)
+            } else {
+                res.status(404).send('User not found')
+            }
+        })
+
+    }
 }
 
 

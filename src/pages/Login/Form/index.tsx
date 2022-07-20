@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import UserFormInput from '../Inputs/';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const FormContainer = styled.div`
 padding: 10.26% 13.44% 10.26% 14.84%;
@@ -67,9 +68,13 @@ const RegisterP = styled.p`
 `
 
 const LoginForm = () => {
-  const history = useNavigate();
+  const [user, setUser] = useState('');
+  const [password, setPassword] = useState('');
 
-  let hadError: Boolean;
+  const history = useNavigate();
+  const userRegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+  const paswwordRegExp = new RegExp(/^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{5,})\S$/);
+
   let userInput: HTMLInputElement | null;
   let pwInput: HTMLInputElement | null;
   let errorMsg: HTMLParagraphElement | null;
@@ -82,7 +87,20 @@ const LoginForm = () => {
       pwIcon.style.marginRight = '3vw';
     }
   }
-  function errorMessage(userInput: HTMLInputElement | null, pwInput: HTMLInputElement | null, errorMsg: HTMLParagraphElement | null) {
+
+  function errorTest() {
+    if (userRegExp.test(user) && paswwordRegExp.test(password)) {
+      return true;
+    } else {
+      errorMessage();
+      return false;
+    }
+  }
+
+  function errorMessage() {
+    userInput = document.querySelector('.userName');
+    pwInput = document.querySelector('.userPw');
+    errorMsg = document.querySelector('.errorMsg');
     if (userInput) {
       userInput.classList.add('error');
       userInput.style.borderColor = '#E9B425';
@@ -94,21 +112,46 @@ const LoginForm = () => {
     if (errorMsg) {
       errorMsg.style.display = 'flex';
     }
-    hadError = true;
+  }
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    let test = errorTest();
+    if (test) {
+      try {
+        let res = await fetch(`http://127.0.0.1:3000/users/login?user=${user}&password=${password}`, {
+          method: "GET",
+          headers: new Headers({ 'Content-Type': 'Application/Json' })
+        });
+
+        let loginStatus = res.status;
+        if (loginStatus === 200) {
+          history('/home');
+        } else {
+          errorMessage();
+        }
+      } catch (error) {
+        alert(error);
+      }
+    } else {
+      alert('Usuário ou senha inválidos');
+    }
   }
   return (
     <FormContainer>
-      <Form id='registerUserForm'>
+      <Form onSubmit={handleSubmit}>
         <Welcome><h1>Olá,</h1><p>Para continuar navegando de forma segura, efetue o login na rede</p></Welcome>
         <h2>Login</h2>
         <InputContainer>
-          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={adjustIcons} />
+          <UserFormInput type='email' name='user' className='userName' placeholder='Usuário'
+            onChange={(e) => { setUser(e.target.value) }} />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
-          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha' onChange={adjustIcons} />
+          <UserFormInput type='password' name='password' className='userPw' placeholder='Senha'
+            onChange={(e) => { setPassword(e.target.value) }} />
           <IconContainer>
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
@@ -116,18 +159,7 @@ const LoginForm = () => {
         <ErrorDiv>
           <p className='errorMsg'>Ops, usuário ou senha inválidos. Tente novamente!</p>
         </ErrorDiv>
-        <UserFormInput type='submit' name='userSubmit' value='Continuar' onClick={(event) => {
-          event.preventDefault();
-          if (!hadError) {
-            userInput = document.querySelector('.userName');
-            pwInput = document.querySelector('.userPw');
-            errorMsg = document.querySelector('.errorMsg');
-            errorMessage(userInput, pwInput, errorMsg);
-          } else {
-            history('/home');
-          }
-
-        }} />
+        <UserFormInput type='submit' name='userSubmit' value='Continuar' />
         <RegisterP>Não tem conta? Cadastre-se <a href='/register'>aqui</a>.</RegisterP>
       </Form>
     </FormContainer>
