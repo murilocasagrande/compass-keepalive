@@ -97,7 +97,7 @@ const HomeFooter = () => {
   const [seconds = 30, setSeconds] = useState<number>();
   useEffect(() => {
     countdown(seconds);
-  }, [countdown, seconds])
+  }, [seconds])
   function countdown(counter: Number | any) {
     setTimeout(() => {
       if (counter > 0) {
@@ -126,7 +126,7 @@ const HomeFooter = () => {
         </RefreshTimeout>
         <FooterButtons>
           <NavigateBtn onClick={ButtonHandler} >Continuar Navegando</NavigateBtn>
-          <LogoutBtn onClick={ButtonHandler}>Logout</LogoutBtn>
+          <LogoutBtn onClick={() => history('/')}>Logout</LogoutBtn>
         </FooterButtons>
       </FooterContainer>
     </>

@@ -49,8 +49,8 @@ const InputIcon = styled.img`
   transition: all 0.5s ease-out;
 `
 const ErrorDiv = styled.div`
-  height: 25.487%;
-  max-height: 25.487%;
+  height: 24.487%;
+  max-height: 24.487%;
   p {
     color: #E9B425;
     margin: 10% 18%;
@@ -133,8 +133,6 @@ const LoginForm = () => {
       } catch (error) {
         alert(error);
       }
-    } else {
-      alert('Usuário ou senha inválidos');
     }
   }
   return (
@@ -144,14 +142,14 @@ const LoginForm = () => {
         <h2>Login</h2>
         <InputContainer>
           <UserFormInput type='email' name='user' className='userName' placeholder='Usuário'
-            onChange={(e) => { setUser(e.target.value) }} />
+            onChange={(e) => { setUser(e.target.value); adjustIcons(); }} />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
         </InputContainer>
         <InputContainer>
           <UserFormInput type='password' name='password' className='userPw' placeholder='Senha'
-            onChange={(e) => { setPassword(e.target.value) }} />
+            onChange={(e) => { setPassword(e.target.value); adjustIcons() }} />
           <IconContainer>
             <InputIcon src='images/icon-password.svg' className='pwIcon' />
           </IconContainer>
