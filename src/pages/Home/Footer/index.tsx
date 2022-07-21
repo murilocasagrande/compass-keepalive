@@ -97,7 +97,7 @@ const HomeFooter = () => {
   const [seconds = 30, setSeconds] = useState<number>();
   useEffect(() => {
     countdown(seconds);
-  }, [seconds])
+  })
   function countdown(counter: Number | any) {
     setTimeout(() => {
       if (counter > 0) {
