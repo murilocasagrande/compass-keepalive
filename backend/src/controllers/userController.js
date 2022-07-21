@@ -1,6 +1,10 @@
 import mongoose from "mongoose";
 import users from "../models/User.js";
 import CryptoES from "crypto-es";
+import jwt from 'jsonwebtoken';
+
+const SECRET = 'auth-token';
+
 class UserController {
 
     static createUser = (req, res) => {
@@ -43,9 +47,10 @@ class UserController {
 
         users.find({ 'user': user, 'password': password }, {}, (err, users) => {
             if (users.length > 0) {
-                res.status(200).send(users)
+                const token = jwt.sign({ user, password }, SECRET, { expiresIn: 60 })
+                res.status(200).send({ "token": token });
             } else {
-                res.status(404).send('User not found')
+                res.status(401).send('User not found')
             }
         })
 

@@ -94,7 +94,7 @@ color: #FFF;
 
 const HomeFooter = () => {
   const history = useNavigate();
-  const [seconds = 30, setSeconds] = useState<number>();
+  const [seconds = 60, setSeconds] = useState<number>();
   useEffect(() => {
     countdown(seconds);
   })
@@ -103,8 +103,10 @@ const HomeFooter = () => {
       if (counter > 0) {
         setSeconds(counter - 1)
         return countdown(counter - 1)
+      } else {
+        localStorage.removeItem('token');
+        history('/');
       }
-      history('/');
     }, 1000)
   }
   const ButtonHandler = () => {
@@ -126,7 +128,7 @@ const HomeFooter = () => {
         </RefreshTimeout>
         <FooterButtons>
           <NavigateBtn onClick={ButtonHandler} >Continuar Navegando</NavigateBtn>
-          <LogoutBtn onClick={() => history('/')}>Logout</LogoutBtn>
+          <LogoutBtn onClick={() => { localStorage.removeItem('token'); history('/') }}>Logout</LogoutBtn>
         </FooterButtons>
       </FooterContainer>
     </>

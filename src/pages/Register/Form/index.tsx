@@ -145,10 +145,7 @@ const RegisterForm = () => {
 
     if (userInput?.value) {
       setUserIsValid(userRegExp.test(userInput.value) ? true : false);
-
     }
-
-
     if (pwInput?.value) {
       let i = 0;
       if (/([A-Z])/.test(pwInput.value)) {
@@ -181,7 +178,7 @@ const RegisterForm = () => {
           <UserFormInput type='email' name='user' className='userName' placeholder='Usuário' onChange={(e) => {
             setUser(e.target.value)
             validateFields();
-          }} required />
+          }} />
           <IconContainer>
             <InputIcon src='images/icon-user.svg' className='userIcon' />
           </IconContainer>
