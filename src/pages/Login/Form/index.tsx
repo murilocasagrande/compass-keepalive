@@ -118,11 +118,14 @@ const LoginForm = () => {
     event.preventDefault();
     let test = errorTest();
     if (test) {
+      const userData = JSON.stringify({ user: user, password: password })
       try {
-        let res = await fetch(`http://127.0.0.1:3000/users/login?user=${user}&password=${password}`, {
-          method: "GET",
+        let res = await fetch(`http://127.0.0.1:3000/users/login`, {
+          method: "POST",
+          body: userData,
           headers: new Headers({ 'Content-Type': 'Application/Json' })
         });
+        console.log(res);
 
         let loginStatus = res.status;
         if (loginStatus === 200) {

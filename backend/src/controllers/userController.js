@@ -43,10 +43,8 @@ class UserController {
 
     }
     static validateLogin = (req, res) => {
-        let { user, password } = req.query;
+        let { user, password } = req.body;
 
-        console.log(user, password);
-        console.log(req.body);
         users.find({ 'user': user, 'password': password }, {}, (err, users) => {
             if (users.length > 0) {
                 const token = Jwt.sign({ user, password }, SECRET, { expiresIn: 60 })

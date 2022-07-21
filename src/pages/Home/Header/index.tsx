@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { WeekDay, Month } from 'enums/DateEnums';
+import { useEffect } from 'react';
 
 const Header = styled.header`
   display: flex;
@@ -76,7 +77,9 @@ const HomeHeader = () => {
       })
   }
 
-  getWeather();
+  useEffect(() => {
+    getWeather();
+  })
 
   return (
     <Header>
