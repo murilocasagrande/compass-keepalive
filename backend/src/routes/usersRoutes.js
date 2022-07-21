@@ -7,5 +7,5 @@ router
   .get("/users", UserController.listUsers)
   .get("/users/search", UserController.listUser)
   .post("/users", UserController.createUser)
-  .get("/users/login", UserController.validateLogin)
+  .post("/users/login", UserController.validateLogin)
 export default router;
