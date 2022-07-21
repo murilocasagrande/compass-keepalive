@@ -125,10 +125,10 @@ const LoginForm = () => {
           body: userData,
           headers: new Headers({ 'Content-Type': 'Application/Json' })
         });
-        console.log(res);
-
         let loginStatus = res.status;
         if (loginStatus === 200) {
+          let token = await res.json();
+          localStorage.setItem('token', token.token)
           history('/home');
         } else {
           errorMessage();
