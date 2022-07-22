@@ -14,6 +14,9 @@ const BodyLogo = styled.section`
     max-width: 70vw;
     max-height: 70vh;
   }
+  @media screen and (max-width: 850px){
+    display: none;
+  }
 `
 const Mission = styled.section`
   text-align: right;
@@ -26,12 +29,61 @@ const Mission = styled.section`
     
     &:first-child{
       font-size: 2.25rem;
+    }
   }
-}
   @media screen and (max-width: 1441px){
     h1{
       font-size: 3rem;
     }
+    @media screen and (max-height: 830px){
+      width: 60vw;
+      h1{
+        font-size: 3rem;
+      }
+      @media screen and (max-height: 768px){
+        width: 60vw;
+        h1{
+          font-size: 3rem;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 1024px){
+    @media screen and (max-height: 767px){
+      h1{
+        font-size: 2.7rem;
+      }
+    }
+    @media screen and (max-height: 719px){
+      width: 70vw;
+      h1{
+        font-size: 2.7rem;
+      }
+    }
+    @media screen and (max-height: 670px){
+      width: 80vw;
+      h1{
+        font-size: 2.5rem;
+      }
+    }
+  }
+  @media screen and (max-width: 850px){
+    width: 100vw;
+    h1{
+      font-size: 4rem;
+    }
+    @media screen and (max-width: 450px){
+      h1{
+        font-size: 2.5rem;
+      }
+      @media screen and (min-height: 750px){
+        margin-left: 20vw;
+        h1{
+          font-size: 3rem;
+        }
+      }
+    }
+    
   }
 `
 

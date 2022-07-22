@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { WeekDay, Month } from 'enums/DateEnums';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const Header = styled.header`
   display: flex;
@@ -49,6 +49,15 @@ const HeaderWeather = styled.div`
 const HomeHeader = () => {
   let currentDate = new Date();
 
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+
+  const [isLoaded, setIsLoaded] = useState(false);
+
+  const windowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
   function getWeather() {
     let url;
     navigator.geolocation.getCurrentPosition((pos) => {
@@ -81,23 +90,28 @@ const HomeHeader = () => {
   }
 
   useEffect(() => {
-    getWeather();
+
+    if (!isLoaded) {
+      setIsLoaded(true);
+      getWeather();
+    }
+    window.onresize = windowResize;
   })
 
   return (
     <Header>
       <HeaderLogo src='images/compasso-logo-dark.png' />
-      <HeaderClock className={window.innerWidth < 800 ? 'hidden' : ''}>
+      <HeaderClock className={width < 800 ? 'hidden' : ''}>
         <h1>
           {`${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`}
         </h1>
         <p>{`${WeekDay[currentDate.getDay()]}, ${currentDate.getDate()} de ${Month[currentDate.getMonth()]} de ${currentDate.getFullYear()}`}</p>
       </HeaderClock>
-      <HeaderWeather className={window.innerWidth < 800 ? 'hidden' : ''}>
+      <HeaderWeather className={width < 450 ? 'hidden' : ''}>
         <p id='city'></p>
         <div>
           <img src='images/weather.png' alt='weather img'></img>
-          <h1 id='temperature'></h1>
+          <h1 id='temperature'>-</h1>
         </div>
       </HeaderWeather>
     </Header>

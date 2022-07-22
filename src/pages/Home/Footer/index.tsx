@@ -16,6 +16,9 @@ color: #FFF;
 * {
   font-size: 0.75rem;
 }
+@media screen and (max-width: 450px){
+  align-items: stretch;
+}
 `
 const SeparatingDiv = styled.div`
   border-right: 1px solid #FFF;
@@ -31,9 +34,24 @@ const SeparatingDiv = styled.div`
     & > p {
       margin-left: 30%;
     }
+    @media screen and (max-width: 1110px) {
+      & > p {
+        margin-left: 20%;
+      }
+      @media screen and (max-width: 980px) {
+        & > p {
+          margin-left: 5%;
+        }
+      }
+    }
+  }
+  @media screen and (max-width: 850px){
+    display: none;
   }
 `
 const RefreshTimeout = styled.div`
+box-sizing: border-box;
+  max-height: 9.9vh;
   display: flex;
   align-items: baseline;
   p {
@@ -60,10 +78,19 @@ const RefreshTimeout = styled.div`
       }
     }
   }
+  @media screen and (max-width: 850px){
+    margin-left: 5%;
+  }
+  @media screen and (max-width: 450px){
+    justify-content: flex-end;
+    width: 25vw;
+    > p {
+      display: none;
+    }
+  }
 `
 const FooterButtons = styled.div`
   display:flex;
-  align-items: bottom;
   `
 
 const NavigateBtn = styled.button`
@@ -79,24 +106,37 @@ const NavigateBtn = styled.button`
   -webkit-appearance: none;
   -moz-appearance: none;
   padding: 8% 5%;
+  @media screen and (max-width: 850px){
+    width: 15vw;
+  }
+  @media screen and (max-width: 450px){
+    width: 25vw;
+  }
+
 `
 const LogoutBtn = styled.button`
 font-weight: 900;
 background: none;
-height: 9.17vh;
+height: 9.9vh;
 width: 6.82vw;
 box-shadow: none;
 border: none;
 -webkit-appearance: none;
 -moz-appearance: none;
 color: #FFF;
+@media screen and (max-width: 850px){
+  width: 15vw;
+}
+@media screen and (max-width: 450px){
+  width: 25vw;
+}
 `
 
 const HomeFooter = () => {
   const history = useNavigate();
   const [seconds = 60, setSeconds] = useState<number>();
   useEffect(() => {
-    countdown(seconds);
+    //countdown(seconds);
   })
   function countdown(counter: Number | any) {
     setTimeout(() => {
