@@ -14,6 +14,17 @@ color: #E0E0E0;
 @media screen and (max-height: 800px) {
   padding: 5% 14.84%;
 }
+@media screen and (max-width: 900px) {
+  width: 100vw;
+}
+@media screen and (max-width: 450px) {
+  @media screen and (max-height: 950px){
+    padding-top: 20%;
+    @media screen and (max-height: 700px) {
+      padding-top: 15%;
+    }
+  }
+}
 `
 const Form = styled.form`
   width: 100%;
@@ -31,6 +42,12 @@ margin-bottom: 34.615%;
     font-weight: 300;
     font-size: 3.75rem;
   }
+  @media screen and (max-height: 850px){
+    margin-bottom: 15%;
+  }
+  @media screen and (max-width: 850px){
+    margin-bottom: 15%;
+  }
 `
 const InputContainer = styled.div`
   position: relative;
@@ -40,9 +57,24 @@ const InputContainer = styled.div`
   justify-content: space-between;
 `
 const IconContainer = styled.div`
-  position: absolute;
+position: absolute;
   right: 0;
-  bottom: 30%;
+  bottom: 25%;
+  & > .typing {
+    margin-right: 3vw;
+  }
+  @media screen and (max-width: 1366px){
+    @media screen and (min-width: 900px) {
+      & > .typing {
+        margin-right: 2.5vw;
+      }
+    }
+  }
+  @media screen and (max-width: 850px) {
+    & > .typing {
+    margin-right: 9vw;
+  }
+  }
 `
 const InputIcon = styled.img`
   height: 20px;
@@ -122,8 +154,8 @@ const RegisterForm = () => {
     let userIcon: HTMLImageElement | null = document.querySelector('.userIcon');
     let pwIcon: HTMLImageElement | null = document.querySelector('.pwIcon');
     if (userIcon && pwIcon) {
-      userIcon.style.marginRight = '3vw';
-      pwIcon.style.marginRight = '3vw';
+      userIcon.classList.add('typing');
+      pwIcon.classList.add('typing');
     }
   }
 

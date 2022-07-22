@@ -7,20 +7,23 @@ const Header = styled.header`
   justify-content: space-between;
   height: 30.28%;
   margin: 25px 40px 0 40px;
+  & > .hidden{
+    display:none;
+  }
 `
 const HeaderLogo = styled.img`
   max-height: 42.75px;
 `
 const HeaderClock = styled.div`
-  text-align: center;
-  h1 {
-    font-size: 7rem;
-    line-height: 7rem;
-    font-weight: bolder;
-  }
-  p{
-    font-weight: bold;
-  }
+text-align: center;
+h1 {
+  font-size: 7rem;
+  line-height: 7rem;
+  font-weight: bolder;
+}
+p{
+  font-weight: bold;
+}
 `
 const HeaderWeather = styled.div`
   display: flex;
@@ -84,13 +87,13 @@ const HomeHeader = () => {
   return (
     <Header>
       <HeaderLogo src='images/compasso-logo-dark.png' />
-      <HeaderClock>
+      <HeaderClock className={window.innerWidth < 800 ? 'hidden' : ''}>
         <h1>
           {`${currentDate.getHours().toString().padStart(2, '0')}:${currentDate.getMinutes().toString().padStart(2, '0')}`}
         </h1>
         <p>{`${WeekDay[currentDate.getDay()]}, ${currentDate.getDate()} de ${Month[currentDate.getMonth()]} de ${currentDate.getFullYear()}`}</p>
       </HeaderClock>
-      <HeaderWeather>
+      <HeaderWeather className={window.innerWidth < 800 ? 'hidden' : ''}>
         <p id='city'></p>
         <div>
           <img src='images/weather.png' alt='weather img'></img>
