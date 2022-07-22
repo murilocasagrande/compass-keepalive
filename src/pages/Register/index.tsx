@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import RegisterForm from './Form';
@@ -7,6 +8,9 @@ const RegisterPage = styled.section`
 display: flex;
 background: linear-gradient(180deg, #33383D 0%, #1C1D20 100%);
 height: 100vh;
+& > .hidden {
+  display: none;
+}
 `
 
 const RegisterAside = styled.section`
@@ -23,10 +27,22 @@ const RegisterLogo = styled.img`
 `
 
 const Register = () => {
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+
+  const windowResize = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }
+
+  useEffect(() => {
+    window.onresize = windowResize;
+
+  })
   return (
     <RegisterPage>
       <RegisterForm />
-      <RegisterAside>
+      <RegisterAside className={width > 850 ? '' : 'hidden'}>
         <RegisterLogo src='images/compasso-logo.png' />
       </RegisterAside>
     </RegisterPage>
