@@ -126,7 +126,7 @@ const RegisterForm = () => {
         });
 
         if (res.status === 201) {
-          alert(`Usuário: ${user}, senha: ${password} foi cadastrado com sucesso`);
+          alert(`Usuário cadastrado com sucesso!`);
           history('/');
         } else {
           alert("Ocorreu algum erro ao cadastrar.");

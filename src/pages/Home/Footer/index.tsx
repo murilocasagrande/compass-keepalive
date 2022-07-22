@@ -136,7 +136,7 @@ const HomeFooter = () => {
   const history = useNavigate();
   const [seconds = 60, setSeconds] = useState<number>();
   useEffect(() => {
-    //countdown(seconds);
+    countdown(seconds);
   })
   function countdown(counter: Number | any) {
     setTimeout(() => {
