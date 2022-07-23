@@ -76,11 +76,18 @@ const Mission = styled.section`
       h1{
         font-size: 2.5rem;
       }
+      
       @media screen and (min-height: 750px){
         margin-left: 20vw;
         h1{
           font-size: 3rem;
         }
+      }
+    }
+    @media screen and (max-width: 320px){
+      margin-left: 5vw;
+      h1{
+        font-size: 2.5rem;
       }
     }
     

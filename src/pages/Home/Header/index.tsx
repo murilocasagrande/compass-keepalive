@@ -10,6 +10,9 @@ const Header = styled.header`
   & > .hidden{
     display:none;
   }
+  @media screen and (max-width: 450px){
+    justify-content: center;
+  }
 `
 const HeaderLogo = styled.img`
   max-height: 42.75px;
