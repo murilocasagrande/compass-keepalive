@@ -84,10 +84,14 @@ const Mission = styled.section`
         }
       }
     }
-    @media screen and (max-width: 320px){
+    @media screen and (max-width: 450px){
+      margin-top: 5%;
       margin-left: 5vw;
       h1{
         font-size: 2.5rem;
+      }
+      p {
+        margin-bottom: 10px;
       }
     }
     
