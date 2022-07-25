@@ -25,6 +25,9 @@ color: #E0E0E0;
     }
   }
 }
+@media screen and (max-width: 350px) {
+ padding-top: 5%;
+}
 `
 const Form = styled.form`
   width: 100%;
@@ -72,8 +75,11 @@ position: absolute;
   }
   @media screen and (max-width: 850px) {
     & > .typing {
-    margin-right: 9vw;
+    margin-right: 10vw;
   }
+  }
+  @media screen and (max-width: 450px) {
+    right: -2%;
   }
 `
 const InputIcon = styled.img`

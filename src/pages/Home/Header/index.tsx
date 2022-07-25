@@ -11,8 +11,8 @@ const Header = styled.header`
     display:none;
   }
   @media screen and (max-width: 450px){
-    justify-content: center;
-  }
+     margin: 25px 4% 0 4%;
+   }
 `
 const HeaderLogo = styled.img`
   max-height: 42.75px;
@@ -46,6 +46,15 @@ const HeaderWeather = styled.div`
       flex: 1;
       font-size: 2.5rem;
     }
+}
+@media screen and (max-width: 350px) {
+  img {
+    // width: 15px;
+    // height: 24px;
+  }
+  #temperature {
+    font-size: 2rem;
+  }
 }
 `
 
@@ -110,7 +119,8 @@ const HomeHeader = () => {
         </h1>
         <p>{`${WeekDay[currentDate.getDay()]}, ${currentDate.getDate()} de ${Month[currentDate.getMonth()]} de ${currentDate.getFullYear()}`}</p>
       </HeaderClock>
-      <HeaderWeather className={width < 450 ? 'hidden' : ''}>
+      {/* className={width < 450 ? 'hidden' : ''} */}
+      <HeaderWeather >
         <p id='city'></p>
         <div>
           <img src='images/weather.png' alt='weather img'></img>

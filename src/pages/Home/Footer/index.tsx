@@ -16,15 +16,26 @@ color: #FFF;
 * {
   font-size: 0.75rem;
 }
+@media screen and (max-width: 850px){
+    
+}
 @media screen and (max-width: 450px){
-  align-items: stretch;
+  position:relative;
+  width: 100vw;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  gap: 10px;
+  @media screen and (min-height: 818px){
+    position: absolute;
+    bottom: 0px;
+  }
 }
 `
 const SeparatingDiv = styled.div`
   border-right: 1px solid #FFF;
-  height: 58px;
   padding: 1% 2%;
   width: 45vw;
+  margin: auto 0;
   & > p {
     // max-width: 85.18%;
     margin-left: 35.44%;
@@ -46,7 +57,19 @@ const SeparatingDiv = styled.div`
     }
   }
   @media screen and (max-width: 850px){
-    display: none;
+  }
+  @media screen and (max-width: 450px){
+    max-width: 100vw;
+    width: 100vw;
+    text-align: justify;
+    padding: 2%;
+    height: auto;
+    border-right: none;
+    // border-bottom: 1px solid;
+    & > p {
+      margin: 0;
+      width: 100%;
+    }
   }
 `
 const RefreshTimeout = styled.div`
@@ -79,11 +102,15 @@ box-sizing: border-box;
     }
   }
   @media screen and (max-width: 850px){
-    margin-left: 5%;
+    margin: auto 0;
+    align-items: center;
+    > p {
+      display: none;
+    }
   }
   @media screen and (max-width: 450px){
-    justify-content: flex-end;
-    width: 25vw;
+    justify-content: center;
+    width: 100vw;
     > p {
       display: none;
     }
@@ -91,6 +118,10 @@ box-sizing: border-box;
 `
 const FooterButtons = styled.div`
   display:flex;
+  @media screen and (max-width: 450px){
+    width: 100vw;
+    justify-content: center;
+  }
   `
 
 const NavigateBtn = styled.button`
@@ -99,7 +130,6 @@ const NavigateBtn = styled.button`
   background-color: #FFF;
   color: #C13216;
   height: 9.9vh;
-  flex-grow: 1;
   width: 6.82vw;
   box-shadow: none;
   border: none;
@@ -110,7 +140,7 @@ const NavigateBtn = styled.button`
     width: 15vw;
   }
   @media screen and (max-width: 450px){
-    width: 25vw;
+    width: 50vw;
   }
 
 `
@@ -128,7 +158,8 @@ color: #FFF;
   width: 15vw;
 }
 @media screen and (max-width: 450px){
-  width: 25vw;
+  width: 50vw;
+  border-top: 1px solid #FFF;
 }
 `
 

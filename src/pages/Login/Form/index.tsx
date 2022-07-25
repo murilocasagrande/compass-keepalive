@@ -68,8 +68,11 @@ const IconContainer = styled.div`
   }
   @media screen and (max-width: 850px) {
     & > .typing {
-    margin-right: 9vw;
+    margin-right: 10vw;
   }
+  }
+  @media screen and (max-width: 450px) {
+    right: -2%;
   }
 `
 const InputIcon = styled.img`
