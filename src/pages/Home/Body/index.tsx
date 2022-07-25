@@ -88,7 +88,10 @@ const Mission = styled.section`
       margin-top: 5%;
       margin-left: 5vw;
       h1{
-        font-size: 2.5rem;
+        font-size: 2rem;
+        &:first-child{
+          font-size: 1.5rem;
+        }
       }
       p {
         margin-bottom: 10px;
